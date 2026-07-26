@@ -21,6 +21,7 @@ import { isNLExtract, isNLTarget } from "./ai.js";
 import { ComputerError, ConfigurationError } from "./errors.js";
 import { PlaywrightPageView } from "./page-view.js";
 import { buildHint } from "./trace/hints.js";
+import { writeTraceReport } from "./trace/report.js";
 import { matchedElementsHtml } from "./dom/interactive.js";
 import { resolveDeterministic } from "./resolver/deterministic.js";
 import { collectObservations } from "./resolver/observe.js";
@@ -139,6 +140,16 @@ export class ComputerClient implements IComputerClient {
 
   trace(): Trace {
     return this.tracer.getTrace();
+  }
+
+  /**
+   * Bundle this session into a single self-contained HTML report (screenshots
+   * embedded) that a tester can open and send as one file. Returns its path.
+   *
+   *   const report = await computer.bundle();   // -> <traceDir>/report.html
+   */
+  async bundle(outPath?: string): Promise<string> {
+    return writeTraceReport(this.tracer.getTrace(), outPath);
   }
 
   // ---- primitives -------------------------------------------------------
@@ -639,7 +650,12 @@ export class ComputerClient implements IComputerClient {
       pageUrl,
       pageTitle,
       screenshotPath,
-      error: { message: firstLine(error.message), suggestion: suggestion ?? fix, domExcerpt },
+      error: {
+        message: firstLine(error.message),
+        rendered: error.message,
+        suggestion: suggestion ?? fix,
+        domExcerpt,
+      },
     });
 
     return error;

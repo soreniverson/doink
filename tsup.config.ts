@@ -4,6 +4,7 @@ export default defineConfig({
   entry: {
     index: "src/index.ts",
     langchain: "src/adapters/langchain.ts",
+    cli: "src/cli.ts",
   },
   format: ["esm"],
   dts: true,

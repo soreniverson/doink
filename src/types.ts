@@ -303,7 +303,10 @@ export interface TraceEntry {
 }
 
 export interface TraceError {
+  /** The headline (first line) of the failure. */
   message: string;
+  /** The full multi-line rendered error (page + hint + dom + replay). */
+  rendered?: string;
   suggestion?: string;
   domExcerpt?: string;
 }

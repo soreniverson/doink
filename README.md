@@ -1,5 +1,8 @@
 # doink
 
+[![CI](https://github.com/soreniverson/doink/actions/workflows/ci.yml/badge.svg)](https://github.com/soreniverson/doink/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@soreniverson/doink)](https://www.npmjs.com/package/@soreniverson/doink)
+
 A deterministic, agent-shaped browser SDK over Playwright: **plain selectors are free and never call an LLM**, the LLM path is an explicit, cached `ai()` call, and **every failure is an obsessive, replayable error that tells you exactly what to fix.**
 
 ## Install
@@ -81,6 +84,24 @@ ClickError: no element matched '#submit'
 ```
 
 Every action — success or failure — appends to a replayable `trace.json`; failures also capture a screenshot and a DOM excerpt automatically.
+
+## When it breaks, send a trace — not a description
+
+Every session can be bundled into a **single self-contained HTML file** (screenshots embedded, no folder, no server) — the perfect bug report.
+
+```ts
+const report = await computer.bundle();   // -> ./.traces/<session>/report.html
+console.log("send me this:", report);
+```
+
+Or, with zero code, from the terminal after any run:
+
+```bash
+npx doink report            # bundles the most recent session under ./.traces
+npx doink report ./.traces/2026-…   # or a specific one
+```
+
+Open the file, or send it as-is — it contains every action, its timing and cache verdict, and for each failure the full error and its screenshot inline.
 
 ## The nine primitives
 
