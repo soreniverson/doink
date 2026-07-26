@@ -1,0 +1,83 @@
+{
+  "name": "doink",
+  "version": "0.1.0",
+  "description": "A deterministic, agent-shaped browser SDK over Playwright: plain selectors are free and never call an LLM, the LLM path is an explicit cached ai() call, and every failure is an obsessive, replayable error that tells you what to fix.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Soren Iverson",
+  "homepage": "https://github.com/soreniverson/doink#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soreniverson/doink.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soreniverson/doink/issues"
+  },
+  "keywords": [
+    "playwright",
+    "browser",
+    "automation",
+    "agent",
+    "ai",
+    "llm",
+    "web-scraping",
+    "browser-automation",
+    "cdp",
+    "langchain"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./langchain": {
+      "types": "./dist/langchain.d.ts",
+      "import": "./dist/langchain.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "example": "tsx examples/scrape.ts",
+    "example:basic": "tsx examples/basic.ts",
+    "example:ai": "tsx examples/ai.ts",
+    "example:agent": "tsx examples/agent-loop.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  },
+  "peerDependencies": {
+    "@langchain/core": ">=0.2.0",
+    "zod": ">=3.22.0"
+  },
+  "peerDependenciesMeta": {
+    "@langchain/core": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@langchain/core": "^0.3.0",
+    "@types/node": "^20.14.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "zod": "^3.23.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

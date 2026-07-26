@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; }
+      .hidden { display: none; }
+      button { padding: 0.5rem 1rem; }
+      .price { font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 id="page-title">Sign in</h1>
+      <p id="tagline">The obsessive browser SDK fixture site.</p>
+    </header>
+
+    <main>
+      <form id="login-form" onsubmit="return false;">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" />
+
+        <button id="login" type="submit">Log in</button>
+      </form>
+
+      <section id="product">
+        <h2 class="product-title">Monument Grotesk License</h2>
+        <span class="price">$49.00</span>
+        <span class="stock" data-testid="stock">In stock</span>
+      </section>
+
+      <nav>
+        <a id="dashboard-link" href="/dashboard.html">Go to dashboard</a>
+        <a id="pricing-link" href="/pricing.html">Pricing</a>
+      </nav>
+
+      <section>
+        <button id="reveal" onclick="document.getElementById('secret').classList.remove('hidden')">
+          Reveal the secret
+        </button>
+        <p id="secret" class="hidden">The secret is 42.</p>
+      </section>
+
+      <section>
+        <!-- A real download: a data: URL exposed via a blob so Playwright captures it. -->
+        <a id="download-report" download="report.csv" href="data:text/csv;charset=utf-8,name%2Cvalue%0Aalpha%2C1%0Abeta%2C2%0A">
+          Download report.csv
+        </a>
+      </section>
+
+      <section>
+        <button id="load-async" onclick="setTimeout(() => { document.getElementById('async-status').textContent = 'ready'; }, 400)">
+          Load async
+        </button>
+        <p>Status: <span id="async-status">idle</span></p>
+      </section>
+
+      <section>
+        <!-- Appends a brand-new element to the DOM after a delay (used to test
+             waitFor for an element that is not present yet). -->
+        <button id="make-toast" onclick="setTimeout(() => { const d = document.createElement('div'); d.id = 'late-toast'; d.textContent = 'Saved!'; document.body.appendChild(d); }, 350)">
+          Save (shows a toast later)
+        </button>
+      </section>
+    </main>
+  </body>
+</html>

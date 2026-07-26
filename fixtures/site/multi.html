@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multi-match fixture</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; }
+      button { padding: 0.5rem 1rem; margin: 0.25rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Repeated elements</h1>
+
+    <!-- Three elements sharing a selector: the multi-match (strict-mode) case. -->
+    <ul id="items">
+      <li><button class="repeat-btn" data-idx="0">Item 0</button></li>
+      <li><button class="repeat-btn" data-idx="1">Item 1</button></li>
+      <li><button class="repeat-btn" data-idx="2">Item 2</button></li>
+    </ul>
+    <p>Clicked: <span id="clicked">none</span></p>
+
+    <!-- Matches exactly one element, but it can never be acted on (disabled). -->
+    <button id="disabled-btn" disabled>Can't click me</button>
+
+    <script>
+      document.querySelectorAll(".repeat-btn").forEach((b) => {
+        b.addEventListener("click", () => {
+          document.getElementById("clicked").textContent = b.dataset.idx;
+        });
+      });
+    </script>
+  </body>
+</html>

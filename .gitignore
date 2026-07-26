@@ -1,0 +1,20 @@
+node_modules/
+dist/
+*.log
+
+# Trace output (debugging artifacts, not source)
+.traces*/
+
+# Downloads captured during runs/tests
+.downloads*/
+
+# Test/example resolution caches (a real project commits its .computer-cache.json)
+.cache-test/
+/.computer-cache.json
+
+# OS noise
+.DS_Store
+
+# The resolution cache is meant to be COMMITTED (free reruns for the team),
+# so it is intentionally NOT ignored here. Example/test caches live under
+# tmp dirs which are ignored above.
