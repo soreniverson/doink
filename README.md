@@ -5,14 +5,14 @@ A deterministic, agent-shaped browser SDK over Playwright: **plain selectors are
 ## Install
 
 ```bash
-npm install doink
+npm install @soreniverson/doink
 npx playwright install chromium   # one-time: the browser doink drives
 ```
 
 ## A ten-line example (real site, no API key)
 
 ```ts
-import { ComputerClient } from "doink";
+import { ComputerClient } from "@soreniverson/doink";
 
 const computer = new ComputerClient({ backend: "local" });
 
@@ -32,7 +32,7 @@ Every call above is deterministic and free. A plain string is *always* a selecto
 The only way to invoke an LLM is to wrap a target in `ai(...)`. A reviewer can grep for `ai(` and see every dollar. The first call for a given (page-signature, instruction) pays one model call and caches the resolved selector; every rerun is free, and a stale cached selector self-heals.
 
 ```ts
-import { ComputerClient, ai } from "doink";
+import { ComputerClient, ai } from "@soreniverson/doink";
 
 const computer = new ComputerClient({
   backend: "local",
@@ -99,13 +99,13 @@ Everything downstream — the primitives, the traces, the hints — is identical
 
 ```ts
 // Raw function-calling tools (any framework, or none):
-import { ComputerClient, computerTools, createDispatcher } from "doink";
+import { ComputerClient, computerTools, createDispatcher } from "@soreniverson/doink";
 const tools = computerTools("openai");            // or "anthropic"
 const dispatch = createDispatcher(new ComputerClient());
 // feed each model tool_call to dispatch(); results (incl. the "did you mean" hint) go back to the model.
 
 // LangChain:
-import { createComputerToolkit } from "doink/langchain";
+import { createComputerToolkit } from "@soreniverson/doink/langchain";
 const toolkit = createComputerToolkit(new ComputerClient());
 ```
 

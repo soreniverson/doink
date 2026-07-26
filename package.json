@@ -1,6 +1,9 @@
 {
-  "name": "doink",
+  "name": "@soreniverson/doink",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A deterministic, agent-shaped browser SDK over Playwright: plain selectors are free and never call an LLM, the LLM path is an explicit cached ai() call, and every failure is an obsessive, replayable error that tells you what to fix.",
   "type": "module",
   "license": "MIT",
